@@ -1,0 +1,43 @@
+<html><head><style id="sdk-panel-style">body { color: rgb(60, 60, 60);font-family: Droid Sans;font-weight: 400;font-size: 13.3333px;}</style>
+<meta content="text/html; charset=utf-8" http-equiv="Content-type">
+<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <style media="all" type="text/css">
+      body {
+        background-color: white;
+      }
+      .searchmatch {
+        font-weight: bold;
+      }
+      .navbar-header&gt;button{
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+<body>
+  
+  <nav class="navbar navbar-default">
+      <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#" id="title-box">Translation</a>
+          <button class="btn-xs btn navbar-btn btn-danger pull-right" type="button" id="exit-button">X</button>
+          <button class="btn-xs btn navbar-btn btn-info pull-right" type="button" id="language">ru</button>
+          <button class="btn-xs btn navbar-btn btn-info pull-right" type="button" id="translates-list">History</button>
+          <button class="btn-xs btn navbar-btn btn-info pull-right" type="button" id="translate-one">Translate</button>
+        </div>
+      </div>
+    </nav>
+    <div style="margin-top:-20px" class="panel panel-default">
+      <div class="panel-body">
+        <div id="view-box"><div class="translation-item panel panel-default">    <textarea style="width:350px;" id="translate-input">technologies</textarea>    <button class="do-translate btn-xs btn navbar-btn btn-info pull-right" type="button" id="translate-button">Translate</button>    <div class="panel-body"><div class="btn-group" role="group" aria-label="Third group">      <button onclick="this.firstChild.play()" type="button" class="btn-xs btn btn-info"><audio><source type="audio/mpeg" src="http://d2x1jgnvxlnz25.cloudfront.net/v2/0/54331-631152008.mp3"></source>Your browser does not support the audio element.</audio>Play</button>      </div> [tɛknˈɒlədʒiz]<br><div class="list-group"><li class="list-group-item active"><span class="badge">472</span>технологии</li><li class="list-group-item "><span class="badge">19</span>технологические разработки</li><li class="list-group-item "><span class="badge">2</span>технологические разработки, технологии</li><li class="list-group-item "><span class="badge">0</span>технологии</li></div>  </div></div></div>
+      </div>
+    </div>
+    <div style="margin-top:50px;display:none;" class="panel panel-default" id="translate-view">
+      <div class="panel-body">
+        <textarea id="translate-input"></textarea>
+        <div id="translate-out"></div>
+      </div>
+    </div>
+    
+  
+</body></html>

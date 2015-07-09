@@ -1,0 +1,9 @@
+{
+  "name": "knowledgebase",
+  "title": "Knowledge Base",
+  "id": "jid1-iAHje00VEcvzBg",
+  "description": "A simple add-on to translate and receive the meaning of the word.",
+  "author": "Klamenzui",
+  "license": "MPL 2.0",
+  "version": "0.1"
+}

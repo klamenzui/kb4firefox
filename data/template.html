@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<link href="bootstrap.min.css" type="text/css" rel="stylesheet">
+    <style type="text/css" media="all">
+      body {
+        background-color: white;
+      }
+      .searchmatch {
+        font-weight: bold;
+      }
+      .navbar-header>button{
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+<body>
+  
+  <nav class="navbar navbar-default" >
+      <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a id="title-box" href="#" class="navbar-brand"></a>
+          <button id="exit-button" type="button" class="btn-xs btn navbar-btn btn-danger pull-right">X</button>
+          <button id="language" type="button" class="btn-xs btn navbar-btn btn-info pull-right">en</button>
+          <button id="history-list" type="button" class="btn-xs btn navbar-btn btn-info pull-right">History</button>
+          <button id="translate-one" type="button" class="btn-xs btn navbar-btn btn-info pull-right">Translate</button>
+          <button id="search-word-meaning" type="button" class="btn-xs btn navbar-btn btn-info pull-right">Etimology</button>
+          <button id="next-page" type="button" class="btn-xs btn navbar-btn btn-info pull-right" url="">></button>
+          <button id="prev-page" type="button" class="btn-xs btn navbar-btn btn-info pull-right" url=""><</button>
+        </div>
+      </div>
+    </nav>
+    <div class="panel panel-default" style="margin-top:-20px">
+      <div class="panel-body">
+        <div id="view-box"><div class="alert alert-info" role="alert">Simply right-click on selected text and choose "Search etymology".</div></div>
+      </div>
+    </div>
+    <div id="translate-view" class="panel panel-default" style="margin-top:50px;display:none;">
+      <div class="panel-body">
+        <textarea id="translate-input"></textarea>
+        <div id="translate-out"></div>
+      </div>
+    </div>
+    
+  </body>
+</html>
