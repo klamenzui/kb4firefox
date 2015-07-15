@@ -14,9 +14,46 @@
     </style>
 
     <script src="//api.jquery.com/jquery-wp-content/themes/jquery/js/modernizr.custom.2.8.3.min.js"></script>
+    <script type="text/javascript">
+  $data = JSON.parse('{"suppressant":{"lang":{"current":"ru","target":"en"},"word_id":48467,"word_value":"suppressant","word_top":0,"word_type":1,"transcription":"səprˈesn̩t","word_count":4,"word_speech_parts":{"7":{"code":"Noun","name":"существительное","short_name":"сущ."}},"lemmas":[{"lemma_id":48467,"speech_part_id":7,"lemma_value":"SUPPRESSANT","speech_part":{"code":"Noun","name":"существительное","short_name":"сущ."}}],"is_user":false,"translations":[{"translate_id":92386,"translate_value":"мед. супрессивное средство","translate_votes":50,"speech_part_id":7,"is_user":0,"is_owner":false,"is_blame":0,"star":1,"rating":0,"rating_avg":0.2,"rating_user_vote":0,"source":""},{"translate_id":20512533,"translate_value":"подавление","translate_votes":45,"speech_part_id":0,"is_user":0,"is_owner":false,"is_blame":0,"star":1,"rating":0,"rating_avg":0.2,"rating_user_vote":0,"source":""},{"translate_id":20546115,"translate_value":"препарат для подавления","translate_votes":28,"speech_part_id":0,"is_user":0,"is_owner":false,"is_blame":0,"star":2,"rating":0,"rating_avg":0.2,"rating_user_vote":0,"source":""},{"translate_id":21658100,"translate_value":"мед.средство для подавления аппетита","translate_votes":11,"speech_part_id":0,"is_user":0,"is_owner":false,"is_blame":0,"star":3,"rating":0,"rating_avg":0.2,"rating_user_vote":0,"source":""},{"translate_id":20853543,"translate_value":"a drug that is used to prevent one of the body\'s functions from working normally","translate_votes":4,"speech_part_id":0,"is_user":0,"is_owner":false,"is_blame":0,"star":0,"rating":0,"rating_avg":0.2,"rating_user_vote":0,"source":""}],"sound_url":"http://d2x1jgnvxlnz25.cloudfront.net/v2/1/48467-631152000.mp3"}}');
+  document.addEventListener("DOMContentLoaded", function(event) {
+var view = document.getElementById('view-box');
+var tmp = view.innerHTML;
+for(var i in $data){
+  $data[i].translate_value = ($data[i].translations[$data[i].word_top]?$data[i].translations[$data[i].word_top].translate_value:'');
+  $data[i].id = i;
+  for(var j in $data[i]){
+    
+    if(typeof $data[i][j] == 'object'){
+      var re= new RegExp('\\$'+j+'\\{([\\S\\s]+)\\}'+j,"g");
+      var m = re.exec(tmp);
+      console.log(i,j,m);
+      if(m != null && m[1]){
+        var li = '';
+        for(var k in $data[i][j]){
+          var li_i = m[1]
+          for(var c in $data[i][j][k]){
+            console.log(k,'\\$\\{'+j+'-'+c+'\\}');
+            li_i = li_i.replace(new RegExp('\\$\\{'+j+'-'+c+'\\}',"g"), $data[i][j][k][c]);
+          }
+           li += li_i;
+        }
+        tmp = tmp.replace(m[0],li);
+      }
+    }else{
+      //view.innerHTML =
+      console.log(j,$data[i][j]);
+      tmp = tmp.replace(new RegExp('\\$\\{'+j+'\\}',"g"), $data[i][j]);
+    }
+  }
+}
+view.innerHTML = tmp;
+console.log(tmp);
+});
+  </script>
   </head>
 <body>
-  
+
   <nav class="navbar navbar-default">
       <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
       <div class="container-fluid">
@@ -31,7 +68,37 @@
     </nav>
     <div style="margin-top:-20px" class="panel panel-default">
       <div class="panel-body">
-        <div id="view-box"><div class="translation-item panel panel-default">    <textarea style="width:350px;" id="translate-input">technologies</textarea>    <button class="do-translate btn-xs btn navbar-btn btn-info pull-right" type="button" id="translate-button">Translate</button>    <div class="panel-body"><div class="btn-group" role="group" aria-label="Third group">      <button onclick="this.firstChild.play()" type="button" class="btn-xs btn btn-info"><audio><source type="audio/mpeg" src="http://d2x1jgnvxlnz25.cloudfront.net/v2/0/54331-631152008.mp3"></source>Your browser does not support the audio element.</audio>Play</button>      </div> [tɛknˈɒlədʒiz]<br><div class="list-group"><li class="list-group-item active"><span class="badge">472</span>технологии</li><li class="list-group-item "><span class="badge">19</span>технологические разработки</li><li class="list-group-item "><span class="badge">2</span>технологические разработки, технологии</li><li class="list-group-item "><span class="badge">0</span>технологии</li></div>  </div></div></div>
+        <div id="view-box">
+${id},${translate_value},${word_value},${transcription},${sound_url},${translations}
+        <div class="navbar-header"><button id="clear-history" type="button" class="btn-xs btn navbar-btn btn-danger pull-right">Clear history</button></div>
+        <div class="history-item panel panel-default">  
+          <div class="panel-body">
+            <div aria-label="Toolbar with button groups" role="toolbar" class="btn-toolbar">
+              <div aria-label="Third group" role="group" class="btn-group">
+                <button class="btn btn-info" type="button" onclick="this.firstChild.play()"><audio><source src="${sound_url}" type="audio/mpeg"></source>Your browser does not support the audio element.</audio>Play</button>
+              </div>
+              <div class="btn-group" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default">${word_value}</button>
+                </div>
+                <div class="btn-group" role="group"><button type="button" class="btn btn-default">${transcription}</button></div>
+                <div class="btn-group" role="group">
+                  <div class="btn btn-default" title="${translate_value}" style="overflow:hidden;max-width:200px;">${translate_value}</div>
+                  <div id="history${id}" class="set-visibled btn btn-default"><span class="caret"></span>&nbsp;</div>
+                  <button id="historyDel-${id}" name="${id}" class="del-btn btn btn-danger">x</button>
+                </div>
+              </div>
+            </div>
+            <div id="history${id}-view" style="display:none;">
+              <ul class="list-group">
+                $translations{
+                <li class="list-group-item"><span class="badge">${translations-translate_votes}</span>${translations-translate_value}</li>
+                }translations
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <div style="margin-top:50px;display:none;" class="panel panel-default" id="translate-view">
@@ -41,5 +108,18 @@
       </div>
     </div>
     
-  
+  <table class="table table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th data-field="id">Item ID</th>
+            <th data-field="name">Item Name</th>
+            <th data-field="price">Item Price</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>2</td><td>3</td></tr>
+    </tbody>
+</table>
+
+
 </body></html>
